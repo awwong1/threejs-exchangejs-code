@@ -39,6 +39,16 @@ const main = () => {
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 
   window.addEventListener('resize', handleOnWindowResize(renderer, camera, scene), false)
+
+  // Render loop
+  const tick: FrameRequestCallback = (curTime) => {
+    const elapsedTime = curTime / 1000
+    renderer.render(scene, camera)
+
+    // Call tick again on the next frame
+    window.requestAnimationFrame(tick)
+  }
+  window.requestAnimationFrame(tick)
 }
 
 
