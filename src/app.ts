@@ -21,7 +21,7 @@ const main = () => {
     height: window.innerHeight
   }
 
-  // Step 1: Initialize Scene
+  // Initialize Scene
   const scene = new THREE.Scene();
 
   // Initialize the Camera and add it to the scene
@@ -31,7 +31,7 @@ const main = () => {
   camera.position.z = 2
   scene.add(camera)
 
-  // Step : Initialize the Renderer
+  // Initialize the Renderer
   const renderer = new THREE.WebGLRenderer({
     canvas: canvas
   })
