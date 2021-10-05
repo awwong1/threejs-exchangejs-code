@@ -10,7 +10,6 @@ const handleOnWindowResize = (renderer: THREE.WebGLRenderer, camera: THREE.Persp
   renderer.render(scene, camera)
 }
 
-
 const main = () => {
   // Initialize DOM Canvas and viewport sizes
   const canvas = <HTMLCanvasElement | null>document.getElementById('canvas')
@@ -24,6 +23,12 @@ const main = () => {
   camera.position.set(1, 1, 2)
   scene.add(camera)
 
+  // Adding in a basic cube
+  const geometry = new THREE.BoxGeometry(1, 1, 1)
+  const material = new THREE.MeshBasicMaterial({ color: 0x663399 })
+  const mesh = new THREE.Mesh(geometry, material)
+  scene.add(mesh)
+
   // Initialize the Renderer
   const renderer = new THREE.WebGLRenderer({ canvas })
   renderer.setSize(window.innerWidth, window.innerHeight)
@@ -35,6 +40,10 @@ const main = () => {
   const tick: FrameRequestCallback = (curTime) => {
     const elapsedTime = curTime / 1000
     renderer.render(scene, camera)
+
+    // make cube rotate (Euler angles, radians) and set camera focus
+    mesh.rotation.set(elapsedTime, elapsedTime, elapsedTime)
+    camera.lookAt(mesh.position)
 
     // Call tick again on the next frame
     window.requestAnimationFrame(tick)
