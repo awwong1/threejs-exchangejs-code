@@ -23,9 +23,18 @@ const main = () => {
   camera.position.set(1, 1, 2)
   scene.add(camera)
 
+  // Adding in an ambient (directionless, illuminates everything) light
+  const ambientLight = new THREE.AmbientLight(0xffffff, 0.3)
+  scene.add(ambientLight)
+
+  // Adding in a directional (lightbulb, emitting rays from a source) light
+  const directionalLight = new THREE.DirectionalLight(0xffffff, 0.6)
+  scene.add(directionalLight)
+  directionalLight.position.set(2, 2, -1)
+
   // Adding in a basic cube
   const geometry = new THREE.BoxGeometry(1, 1, 1)
-  const material = new THREE.MeshBasicMaterial({ color: 0x663399 })
+  const material = new THREE.MeshStandardMaterial({ color: 0x663399 })
   const mesh = new THREE.Mesh(geometry, material)
   scene.add(mesh)
 
